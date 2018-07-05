@@ -20,12 +20,7 @@ public class CustomProxyToServerExHandlerTest extends MitmWithBadServerAuthentic
         .withChainProxyManager(chainedProxyManager())
         .plusActivityTracker(DOWNSTREAM_TRACKER)
         .withManInTheMiddle(new SelfSignedMitmManagerFactory())
-        .withProxyToServerExHandler(new ExceptionHandler() {
-          @Override
-          public void handle(Throwable cause) {
-            customExHandlerEntered.add(cause);
-          }
-        })
+        .withProxyToServerExHandler(customExHandlerEntered::add)
         .start();
   }
 
